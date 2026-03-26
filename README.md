@@ -260,17 +260,3 @@ Ejemplo de conversación:
    ```
 
 ---
-
-## Diagrama de flujo
-
-```
-Usuario → cliente_mcp.py → Ollama (IA)
-                              ↓
-                      Decide usar herramienta
-                              ↓
-                  mysql_mcp_server.py
-                              ↓
-                    MySQL (base de datos)
-                              ↓
-                  Resultado → Ollama → Usuario
-```
