@@ -3,7 +3,7 @@
   "mcp": {
     "mysql_local": {
       "type": "local",
-      "command": ["uv", "run", "mysql_mcp_server.py"],
+      "command": ["uv", "run", "src/scripts/mysql_mcp_server.py"],
       "enabled": true,
       "environment": {
         // Añadir variables de ser necesario

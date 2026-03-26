@@ -1,15 +1,19 @@
 from mcp.server.fastmcp import FastMCP
 import mysql.connector
+import os
+from dotenv import load_dotenv
 
 # 1. Inicializamos el servidor MCP
 mcp = FastMCP("Servidor_MySQL_Local")
 
-# 2. Configura tus credenciales de MySQL (las mismas de Workbench)
+# 2. Configura tus credenciales de MySQL
+load_dotenv()
+
 DB_CONFIG = {
     "host": "127.0.0.1",
-    "user": "root",           # Cambia por tu usuario
-    "password": "mysql49DmP6351$", # Cambia por tu contraseña
-    "database": "Prueba" # Cambia por tu BD
+    "user": "root",
+    "password": os.getenv("DB_PASSWORD"),
+    "database": "prueba"
 }
 
 def obtener_conexion():

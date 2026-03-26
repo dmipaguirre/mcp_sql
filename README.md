@@ -11,18 +11,24 @@ Este proyecto conecta un modelo de inteligencia artificial local (Ollama) con un
 El proyecto está organizado de la siguiente manera:
 
 ```
-/                 # Raíz del repositorio
+/                           # Raíz del repositorio
 │
-├─ src/           # Código fuente principal
-│   ├─ server/    # Servidor MCP y herramientas
-│   ├─ client/    # Cliente que habla con Ollama
-│   └─ common/   # Código reutilizable (conexión, constantes)
+├─ src/
+│   └─ scripts/            # Código fuente principal
+│       ├─ mysql_mcp_server.py  # Servidor MCP y herramientas
+│       └─ cliente_mcp.py       # Cliente que habla con Ollama
 │
-├─ scripts/       # Scripts de utilidad (p. ej. prueba_conexion.py)
-├─ tests/         # Tests unitarios/integración
-├─ docs/          # Documentación adicional
-├─ 
-├─ requirements.txt
+├─ tests/                 # Tests y scripts de prueba
+│   └─ prueba_conexion.py
+│
+├─ docs/                  # Documentación adicional
+│   └─ tutorial.md
+│
+├─ .env                   # Variables de entorno
+├─ .gitignore
+├─ opencode.jsonc
+├─ pyproject.toml
+├─ uv.lock
 └─ README.md
 ```
 
@@ -226,20 +232,15 @@ if mensaje_ia.get('tool_calls'):
 
 ### 1. Verificar conexión a MySQL
 ```bash
-python scripts/prueba_conexion.py
+python tests/prueba_conexion.py
 ```
 
-### 2. Iniciar el servidor MCP (en una terminal)
+### 2. Iniciar el cliente (el servidor MCP se inicia automáticamente)
 ```bash
-python src/server/mysql_mcp_server.py
+python src/scripts/cliente_mcp.py
 ```
 
-### 3. Iniciar el cliente (en otra terminal)
-```bash
-python cliente_mcp.py
-```
-
-### 4. Chatear con la IA
+### 3. Chatear con la IA
 
 Ejemplo de conversación:
 - **Tú:** "Muéstrame las tablas que hay en la base de datos"

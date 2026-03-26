@@ -11,7 +11,7 @@ async def iniciar_cliente():
     # 1. Configurar cómo vamos a ejecutar el servidor MCP
     # Usamos 'python' para ejecutar el script del servidor que creamos antes
     parametros_servidor = StdioServerParameters(
-        command="python", args=["src/server/mysql_mcp_server.py"]
+        command="python", args=["mysql_mcp_server.py"]
     )
 
     # 2. Iniciar la conexión stdio con el servidor MCP
@@ -68,8 +68,8 @@ async def iniciar_cliente():
                         nombre_herramienta = tool_call["function"]["name"]
                         argumentos = tool_call["function"]["arguments"]
 
-                        print(f"\n[⚙️ El modelo está ejecutando: {nombre_herramienta}]")
-                        print(f"[⚙️ Argumentos: {argumentos}]")
+                        print(f"\n[⚙️-> El modelo está ejecutando: {nombre_herramienta}]")
+                        print(f"[⚙️-> Argumentos: {argumentos}]")
 
                         # Ejecutar la herramienta a través de nuestro servidor MCP
                         resultado_mcp = await sesion.call_tool(
