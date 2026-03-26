@@ -4,7 +4,7 @@ A continuación se describe, con el mayor nivel de detalle posible, qué hace ca
 
 ---
 
-## 1. `prueba_conexion.py`
+## 1. `tests/prueba_conexion.py`
 
 ```python
 1: import mysql.connector
@@ -90,7 +90,7 @@ A continuación se describe, con el mayor nivel de detalle posible, qué hace ca
 
 ---
 
-## 2. `mysql_mcp_server.py`
+## 2. `src/scripts/mysql_mcp_server.py`
 
 ```python
 1: from mcp.server.fastmcp import FastMCP
@@ -219,11 +219,11 @@ A continuación se describe, con el mayor nivel de detalle posible, qué hace ca
 74:     # Inicia el servidor MCP usando STDIO (estándar para clientes MCP)
 75:     mcp.run()
 ```
-*Cuando el script se ejecuta directamente (`python mysql_mcp_server.py`) lanza el bucle del servidor MCP. La comunicación con los clientes se realiza vía STDIO (entrada/salida estándar), lo que permite que otro proceso (el cliente) se conecte mediante tuberías.*
+*Cuando el script se ejecuta directamente (`python src/scripts/mysql_mcp_server.py`) lanza el bucle del servidor MCP. La comunicación con los clientes se realiza vía STDIO (entrada/salida estándar), lo que permite que otro proceso (el cliente) se conecte mediante tuberías.*
 
 ---
 
-## 3. `cliente_mcp.py`
+## 3. `src/scripts/cliente_mcp.py`
 
 ```python
 1: import asyncio
@@ -248,10 +248,10 @@ A continuación se describe, con el mayor nivel de detalle posible, qué hace ca
 12:     # Usamos 'python' para ejecutar el script del servidor que creamos antes
 13:     parametros_servidor = StdioServerParameters(
 14:         command="python", 
-15:         args=["mysql_mcp_server.py"] # Asegúrate de que el nombre coincida
+15:         args=["src/scripts/mysql_mcp_server.py"] # Asegúrate de que la ruta coincida
 16:     )
 ```
-*Crea un objeto `StdioServerParameters` que indica que el proceso del servidor será lanzado con `python mysql_mcp_server.py`. Este objeto será usado por `stdio_client` para abrir una tubería de entrada/salida entre cliente y servidor.*
+*Crea un objeto `StdioServerParameters` que indica que el proceso del servidor será lanzado con `python src/scripts/mysql_mcp_server.py`. Este objeto será usado por `stdio_client` para abrir una tubería de entrada/salida entre cliente y servidor.*
 
 ```python
 18:     # 2. Iniciar la conexión stdio con el servidor MCP
@@ -390,30 +390,15 @@ A continuación se describe, con el mayor nivel de detalle posible, qué hace ca
 
 ---
 
-## 4. `main.py`
-
-```python
-1: def main():
-2:     print("Hello from mcp-sql!")
-3: 
-4: 
-5: if __name__ == "__main__":
-6:     main()
-```
-*Archivo de ejemplo muy simple que solo muestra un mensaje por consola. No tiene relación con la lógica del servidor/cliente; sirve como “placeholder” o punto de partida para pruebas rápidas.*
-
----
-
-# Resumen general del flujo
+## 4. Resumen general del flujo
 
 1. **`prueba_conexion.py`** verifica que la base de datos MySQL sea accesible con la configuración proveída.  
-2. **`mysql_mcp_server.py`** levanta un *servidor MCP* que expone dos funciones (`leer_datos_mysql` y `modificar_base_datos`) como “herramientas” que pueden ser invocadas remotamente.  
+2. **`mysql_mcp_server.py`** levanta un *servidor MCP* que expone dos funciones (`leer_datos_mysql` y `modificar_base_datos`) como "herramientas" que pueden ser invocadas remotamente.  
 3. **`cliente_mcp.py`**:
    - Inicia el servidor anterior vía STDIO.  
    - Conecta con Ollama (modelo local).  
    - Envía al modelo el historial de conversación y la lista de herramientas.  
-   - Cuando Ollama decide que necesita ejecutar una herramienta, el cliente llama al servidor MCP, obtiene el resultado y vuelve a enviar al modelo para que genere la respuesta final al usuario.  
-4. **`main.py`** es un simple “hello world”; no interviene en el flujo real.  
+   - Cuando Ollama decide que necesita ejecutar una herramienta, el cliente llama al servidor MCP, obtiene el resultado y vuelve a enviar al modelo para que genere la respuesta final al usuario.
 
 Este esquema permite que cualquier usuario converse en lenguaje natural con una IA que, bajo demanda, ejecuta consultas SQL contra su base de datos sin que el usuario tenga que recordar la sintaxis exacta. La separación cliente‑servidor (STDIO) hace que el modelo sea totalmente agnóstico al entorno de base de datos; solo necesita conocer la descripción de las funciones.
 

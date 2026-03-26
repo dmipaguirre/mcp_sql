@@ -11,20 +11,20 @@ Este proyecto conecta un modelo de inteligencia artificial local (Ollama) con un
 El proyecto está organizado de la siguiente manera:
 
 ```
-/                           # Raíz del repositorio
+/                               # Raíz del repositorio
 │
 ├─ src/
-│   └─ scripts/            # Código fuente principal
+│   └─ scripts/                 # Código fuente principal
 │       ├─ mysql_mcp_server.py  # Servidor MCP y herramientas
 │       └─ cliente_mcp.py       # Cliente que habla con Ollama
 │
-├─ tests/                 # Tests y scripts de prueba
+├─ tests/                       # Tests y scripts de prueba
 │   └─ prueba_conexion.py
 │
-├─ docs/                  # Documentación adicional
+├─ docs/                        # Documentación adicional
 │   └─ tutorial.md
 │
-├─ .env                   # Variables de entorno
+├─ .env                         # Variables de entorno
 ├─ .gitignore
 ├─ opencode.jsonc
 ├─ pyproject.toml
