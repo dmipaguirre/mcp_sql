@@ -8,7 +8,7 @@ mcp = FastMCP("Servidor_MySQL_Local")
 DB_CONFIG = {
     "host": "127.0.0.1",
     "user": "root",           # Cambia por tu usuario
-    "password": "****", # Cambia por tu contraseña
+    "password": "mysql49DmP6351$", # Cambia por tu contraseña
     "database": "Prueba" # Cambia por tu BD
 }
 

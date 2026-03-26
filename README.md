@@ -6,7 +6,25 @@ Este proyecto conecta un modelo de inteligencia artificial local (Ollama) con un
 
 ---
 
-## Archivos del proyecto
+## Estructura del proyecto
+
+El proyecto está organizado de la siguiente manera:
+
+```
+/                 # Raíz del repositorio
+│
+├─ src/           # Código fuente principal
+│   ├─ server/    # Servidor MCP y herramientas
+│   ├─ client/    # Cliente que habla con Ollama
+│   └─ common/   # Código reutilizable (conexión, constantes)
+│
+├─ scripts/       # Scripts de utilidad (p. ej. prueba_conexion.py)
+├─ tests/         # Tests unitarios/integración
+├─ docs/          # Documentación adicional
+├─ 
+├─ requirements.txt
+└─ README.md
+```
 
 ### 1. prueba_conexion.py - Verificar que MySQL funciona
 
@@ -37,7 +55,7 @@ def probar_conexion():
 
 **Para ejecutarlo:**
 ```bash
-python prueba_conexion.py
+python scripts/prueba_conexion.py
 ```
 
 ---
@@ -137,7 +155,7 @@ Este es el "puente" entre el modelo de IA y el servidor MCP. Permite que el usua
 ```python
 parametros_servidor = StdioServerParameters(
     command="python",
-    args=["mysql_mcp_server.py"]
+    args=["src/server/mysql_mcp_server.py"]
 )
 ```
 
@@ -208,12 +226,12 @@ if mensaje_ia.get('tool_calls'):
 
 ### 1. Verificar conexión a MySQL
 ```bash
-python prueba_conexion.py
+python scripts/prueba_conexion.py
 ```
 
 ### 2. Iniciar el servidor MCP (en una terminal)
 ```bash
-python mysql_mcp_server.py
+python src/server/mysql_mcp_server.py
 ```
 
 ### 3. Iniciar el cliente (en otra terminal)
