@@ -8,7 +8,7 @@ mcp = FastMCP("Servidor_MySQL_Local")
 DB_CONFIG = {
     "host": "127.0.0.1",
     "user": "root",           # Cambia por tu usuario
-    "password": "*****", # Cambia por tu contraseña
+    "password": "****", # Cambia por tu contraseña
     "database": "Prueba" # Cambia por tu BD
 }
 
@@ -53,11 +53,8 @@ def modificar_base_datos(query: str) -> str:
 
         conn = obtener_conexion()
         cursor = conn.cursor()
-        
-        # Ejecutamos la consulta de modificación
         cursor.execute(query)
         
-        # ¡MUY IMPORTANTE! Confirmamos los cambios en la base de datos
         conn.commit() 
         
         filas_afectadas = cursor.rowcount

@@ -4,14 +4,14 @@ from mcp import ClientSession, StdioServerParameters
 from mcp.client.stdio import stdio_client
 
 # Cambia esto por el modelo que tengas descargado en Ollama
-MODELO = 'qwen3.5:9b' 
+MODELO = 'qwen3.5:9b'
 
 async def iniciar_cliente():
     # 1. Configurar cómo vamos a ejecutar el servidor MCP
     # Usamos 'python' para ejecutar el script del servidor que creamos antes
     parametros_servidor = StdioServerParameters(
         command="python", 
-        args=["mysql_mcp_server.py"] # Asegúrate de que el nombre coincida
+        args=["mysql_mcp_server.py"]
     )
 
     # 2. Iniciar la conexión stdio con el servidor MCP
