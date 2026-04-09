@@ -4,7 +4,7 @@ from mcp import ClientSession, StdioServerParameters
 from mcp.client.stdio import stdio_client
 
 # Cambia esto por el modelo que tengas descargado en Ollama
-MODELO = "qwen3.5:9b"
+MODELO = "gemma4:e4b"
 
 
 async def iniciar_cliente():
@@ -48,7 +48,7 @@ async def iniciar_cliente():
             # 4. Iniciar el bucle de chat
             while True:
                 texto_usuario = input("🗿 Tú: ")
-                if texto_usuario.lower() in ["salir", "exit", "quit"]:
+                if texto_usuario.lower() in ["salir", "exit", "quit",]:
                     break
 
                 mensajes.append({"role": "user", "content": texto_usuario})
@@ -68,8 +68,8 @@ async def iniciar_cliente():
                         nombre_herramienta = tool_call["function"]["name"]
                         argumentos = tool_call["function"]["arguments"]
 
-                        print(f"\n[⚙️-> El modelo está ejecutando: {nombre_herramienta}]")
-                        print(f"[⚙️-> Argumentos: {argumentos}]")
+                        print(f"\n[⚙️ El modelo está ejecutando: {nombre_herramienta}]")
+                        print(f"[⚙️ Argumentos: {argumentos}]")
 
                         # Ejecutar la herramienta a través de nuestro servidor MCP
                         resultado_mcp = await sesion.call_tool(
